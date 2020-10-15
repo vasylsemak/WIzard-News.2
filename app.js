@@ -2,15 +2,20 @@ const express = require("express");
 const morgan = require("morgan");
 const postList = require("./views/postList");
 const postDetails = require("./views/postDetails");
+const client = require('./db');
 
 const app = express();
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", (req, res) => {
-    const posts = postBank.list();
-    res.send(postList(posts));
+app.get("/", async (req, res) => {
+  try {
+    const data = await client.query('SELECT * FROM posts;');
+    res.send(postList(data.rows));
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
 app.get("/posts/:id", (req, res) => {
