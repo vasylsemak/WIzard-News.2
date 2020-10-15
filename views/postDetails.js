@@ -12,7 +12,7 @@ module.exports = (post) => html`<!DOCTYPE html>
     <header><img src="/logo.png"/>Wizard News</header>
       <div class='news-item'>
       <p>
-        ${post.title} <small>(by ${post.name})</small>
+        ${post.title} <small>(by ${post.id})</small>
       </p>
       <p>${post.content}</p>
     </div>
