@@ -1,6 +1,5 @@
 const express = require("express");
 const morgan = require("morgan");
-const postBank = require("./postBank");
 const postList = require("./views/postList");
 const postDetails = require("./views/postDetails");
 
@@ -10,8 +9,8 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", (req, res) => {
-  const posts = postBank.list();
-  res.send(postList(posts));
+    const posts = postBank.list();
+    res.send(postList(posts));
 });
 
 app.get("/posts/:id", (req, res) => {
